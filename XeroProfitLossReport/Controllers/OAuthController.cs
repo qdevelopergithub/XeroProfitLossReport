@@ -100,13 +100,13 @@ namespace XeroProfitLossReport.Controllers
                 return Ok(new
                 {
                     message = "OAuth flow completed successfully",
-                    access_token = tokenResponse.AccessToken,
-                    token_type = tokenResponse.TokenType,
-                    expires_in = tokenResponse.ExpiresIn,
-                    scope = tokenResponse.Scope,
-                    // Note: In production, don't return tokens in response. Store them securely and use session/auth cookies
-                    id_token = tokenResponse.IdToken,
-                    refresh_token = tokenResponse.RefreshToken
+                    //access_token = tokenResponse.AccessToken,
+                    //token_type = tokenResponse.TokenType,
+                    //expires_in = tokenResponse.ExpiresIn,
+                    //scope = tokenResponse.Scope,
+                    //// Note: In production, don't return tokens in response. Store them securely and use session/auth cookies
+                    //id_token = tokenResponse.IdToken,
+                    //refresh_token = tokenResponse.RefreshToken
                 });
             }
             catch (Exception ex)
