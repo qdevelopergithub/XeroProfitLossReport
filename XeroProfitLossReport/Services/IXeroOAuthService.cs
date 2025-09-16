@@ -4,7 +4,7 @@ namespace XeroProfitLossReport.Services
 {
     public interface IXeroOAuthService
     {
-        Task<XeroTokenResponse> ExchangeCodeForTokensAsync(string code, string redirectUri);
+        Task<OAuthResponse> ExchangeCodeForTokensAsync(string code, string redirectUri);
         string GenerateAuthorizationUrl(string state);
         string GenerateRandomState();
     }
