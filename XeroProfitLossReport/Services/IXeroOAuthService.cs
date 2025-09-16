@@ -7,5 +7,6 @@ namespace XeroProfitLossReport.Services
         Task<OAuthResponse> ExchangeCodeForTokensAsync(string code, string redirectUri);
         string GenerateAuthorizationUrl(string state);
         string GenerateRandomState();
+        Task<string?> GetAccessTokenAsync();
     }
 }

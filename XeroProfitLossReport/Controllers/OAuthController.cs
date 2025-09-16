@@ -134,5 +134,36 @@ namespace XeroProfitLossReport.Controllers
                 callback_url = Url.Action("Callback", "OAuth", null, Request.Scheme)
             });
         }
+
+        /// <summary>
+        /// Get access token from database
+        /// </summary>
+        [HttpGet("access-token")]
+        public async Task<IActionResult> GetAccessToken()
+        {
+            try
+            {
+                var accessToken = await _oauthService.GetAccessTokenAsync();
+
+                if (string.IsNullOrEmpty(accessToken))
+                {
+                    _logger.LogWarning("No access token found in database");
+                    return NotFound(new { error = "No access token found" });
+                }
+
+                _logger.LogInformation("Access token retrieved successfully");
+
+                return Ok(new
+                {
+                    message = "Access token retrieved successfully",
+                    access_token = accessToken
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving access token");
+                return StatusCode(500, new { error = "Failed to retrieve access token", details = ex.Message });
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using XeroProfitLossReport.Data;
 using XeroProfitLossReport.Models;
@@ -102,6 +103,20 @@ namespace XeroProfitLossReport.Services
             {
                 _logger.LogError(ex, "Error exchanging code for tokens. Code: {Code}, RedirectUri: {RedirectUri}", code, redirectUri);
                 throw;
+            }
+        }
+
+        public async Task<string?> GetAccessTokenAsync()
+        {
+            try
+            {
+                var oauthResponse = await _context.OAuthResponses.FirstOrDefaultAsync();
+                return oauthResponse?.AccessToken;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving access token from database");
+                return null;
             }
         }
     }
